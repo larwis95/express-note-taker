@@ -37,4 +37,32 @@ notes.post('/', (req, res) => {
         }
     });
 
+notes.delete('/:note_id', (req, res) => {
+    if (req.params.note_id) {
+        const id = Number(req.params.note_id);
+        console.info(`${req.method} for note id: ${id}`);
+        fs.readFile(db, (err, data) => {
+            if (err) {
+                console.info(err);
+            }
+            const notes = JSON.parse(data);
+            for (let i = 0; i < notes.length; i++) {
+                console.log(notes[i].note_id)
+                if (notes[i].note_id === id) {
+                    notes.splice(i, 1);
+                }
+            }
+            fs.writeFile(db, JSON.stringify(notes), (err) => err ? console.log(err) : console.log(`Sucessfully wrote to ${db}`));
+        });
+        const response = {
+            status: 'success',
+          };
+        console.log(response);
+        res.status(201).json(response);
+    }
+    else {
+        res.status(500).json('Error in deleteing note.');
+    }
+});
+
 module.exports = notes;
