@@ -9,6 +9,8 @@ Clone the repository then open it in your terminal. Run npm i to install the req
 ## Usage
 Navigate to https://localhost:3001/ in your browser. Click the get started button to be taken to the notes page. Type in the from provided for Notes Title, and Note text. Press save to save the note. Click on the notes list on the left to bring up a past note. Use the trashcan icon to delete a note.
 
+Live Demo at: https://lw-express-notes-8e3afb57ae7f.herokuapp.com/
+
 ## Screen shot
 ![The webpage should look like this screenshot](./note-taker-ss.png)
 
