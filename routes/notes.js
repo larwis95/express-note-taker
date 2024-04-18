@@ -1,8 +1,11 @@
 const notes = require('express').Router();
 const fs = require('fs');
+//id generator helper
 const id = require('../helpers/id');
+//file path for our db file
 const db = './db/db.json';
 
+//api call for retreiving all notes
 notes.get('/', (req, res) => {
     console.info(`${req.method} for notes.`);
     fs.readFile(db, (err, data) => {
@@ -12,6 +15,7 @@ notes.get('/', (req, res) => {
     })
 });
 
+//post call for creating a new note
 notes.post('/', (req, res) => {
     console.info(`${req.method} for notes.`);
     console.log(req.body)
@@ -37,6 +41,7 @@ notes.post('/', (req, res) => {
         }
     });
 
+//delete call for removing a note from the DB
 notes.delete('/:note_id', (req, res) => {
     if (req.params.note_id) {
         const id = Number(req.params.note_id);
@@ -47,7 +52,6 @@ notes.delete('/:note_id', (req, res) => {
             }
             const notes = JSON.parse(data);
             for (let i = 0; i < notes.length; i++) {
-                console.log(notes[i].note_id)
                 if (notes[i].note_id === id) {
                     notes.splice(i, 1);
                 }
